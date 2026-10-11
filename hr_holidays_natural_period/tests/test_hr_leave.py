@@ -35,14 +35,16 @@ class TestHrLeave(BaseCommon):
         calendar = calendar.copy({"name": "Test calendar"})
         calendar.switch_calendar_type()
         calendar.attendance_ids.filtered(
-            lambda x: x.week_type == "0"
-            and not x.display_type
-            and x.day_period == "afternoon"
+            lambda x: (
+                x.week_type == "0"
+                and not x.display_type
+                and x.day_period == "afternoon"
+            )
         ).unlink()
         calendar.attendance_ids.filtered(
-            lambda x: x.week_type == "1"
-            and not x.display_type
-            and x.day_period == "morning"
+            lambda x: (
+                x.week_type == "1" and not x.display_type and x.day_period == "morning"
+            )
         ).unlink()
         partner = cls.env["res.partner"].create(
             {
@@ -119,7 +121,7 @@ class TestHrLeave(BaseCommon):
 
     def _test_hr_leave_natural_day_02(self):
         attendances = []
-        for i in range(0, 5):
+        for i in range(5):
             attendances.append((i, "morning", 10, 14))
             attendances.append((i, "afternoon", 16, 20))
         r_sudo = self.env["resource.calendar"].sudo()

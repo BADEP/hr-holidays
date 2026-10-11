@@ -16,9 +16,11 @@ class HrLeave(models.Model):
         # resource.calendar~_attendance_intervals_batch
         mod_holidays_status_ids = self.env.context.get("mod_holidays_status_ids", [])
         natural_day_instances = self.filtered(
-            lambda x: x.holiday_status_id.id in mod_holidays_status_ids
-            or x.holiday_status_id.request_unit
-            in ("natural_day", "natural_day_half_day")
+            lambda x: (
+                x.holiday_status_id.id in mod_holidays_status_ids
+                or x.holiday_status_id.request_unit
+                in ("natural_day", "natural_day_half_day")
+            )
         )
         res = super(HrLeave, self - natural_day_instances)._get_durations(
             check_leave_type=check_leave_type, resource_calendar=resource_calendar
