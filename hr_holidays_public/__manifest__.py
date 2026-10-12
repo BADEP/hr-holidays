@@ -4,7 +4,7 @@
 
 {
     "name": "HR Holidays Public",
-    "version": "19.0.1.0.3",
+    "version": "20.0.1.0.0",
     "license": "AGPL-3",
     "category": "Human Resources",
     "author": "Michael Telahun Makonnen, "
@@ -19,9 +19,9 @@
         "calendar_public_holiday",
     ],
     "data": [
-        "security/ir.model.access.csv",
         "views/hr_leave_type.xml",
         "views/menu.xml",
+        'security/ir.access.csv',
     ],
     "installable": True,
 }
